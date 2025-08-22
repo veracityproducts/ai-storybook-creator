@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sam and Fox Adventures - Complete Story</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .storybook {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .cover {
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .cover h1 {
+            font-size: 2.5em;
+            margin: 0 0 10px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .cover p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        .page {
+            display: flex;
+            min-height: 500px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .page:last-child {
+            border-bottom: none;
+        }
+
+        .page-image {
+            flex: 1;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .page-image img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-text {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #fefefe;
+        }
+
+        .page-number {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .page-content {
+            font-size: 1.8em;
+            line-height: 1.4;
+            color: #333;
+            text-align: center;
+        }
+
+        .story-info {
+            background: #f8f9fa;
+            padding: 30px;
+            border-top: 3px solid #667eea;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-card h4 {
+            margin: 0 0 10px 0;
+            color: #667eea;
+        }
+
+        .info-card p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .consistency-badge {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .page {
+                flex-direction: column;
+            }
+
+            .page-text {
+                padding: 20px;
+            }
+
+            .page-content {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="storybook">
+        <!-- Cover -->
+        <div class="cover">
+            <h1>Sam and Fox Adventures</h1>
+            <p>A Decodable Story for Young Readers - Style Consistency Test</p>
+        </div>
+
+        <!-- Page 1 -->
+        <div class="page">
+            <div class="page-image">
+                <img src="https://ileovklotgalfrgzwutt.supabase.co/storage/v1/object/public/storybook/stories/GYiW7e5-DO/page-00.png"
+                    alt="Sam and Fox at the beach">
+            </div>
+            <div class="page-text">
+                <div class="page-number">Page 1</div>
+                <div class="page-content">As a cat sat at the sand.</div>
+            </div>
+        </div>
+
+        <!-- Page 2 -->
+        <div class="page">
+            <div class="page-text">
+                <div class="page-number">Page 2</div>
+                <div class="page-content">I am at a map.</div>
+            </div>
+            <div class="page-image">
+                <img src="https://ileovklotgalfrgzwutt.supabase.co/storage/v1/object/public/storybook/stories/GYiW7e5-DO/page-01.png"
+                    alt="Sam and Fox looking at a map">
+            </div>
+        </div>
+
+        <!-- Story Information -->
+        <div class="story-info">
+            <h3>📚 Story Details <span class="consistency-badge">✨ Reference Image Used</span></h3>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>🎯 Phonics Pattern</h4>
+                    <p>CVC Short-A pattern with approved graphemes: a, m, s, t, p, n, c, d</p>
+                </div>
+
+                <div class="info-card">
+                    <h4>🎨 Art Style</h4>
+                    <p>3D animation with vibrant, soft colors and warm natural lighting</p>
+                </div>
+
+                <div class="info-card">
+                    <h4>👥 Characters</h4>
+                    <p>Sam (American Black Bear) and Fox (Red Fox) with consistent design</p>
+                </div>
+
+                <div class="info-card">
+                    <h4>🔄 Consistency Method</h4>
+                    <p>Reference image approach + explicit style prompt: "Render in identical 3D animation style"</p>
+                </div>
+
+                <div class="info-card">
+                    <h4>✅ Validation</h4>
+                    <p>Story passed decodability validation after 2 repair attempts</p>
+                </div>
+
+                <div class="info-card">
+                    <h4>🎭 Moral</h4>
+                    <p>"Friends have fun!" - Emphasizing friendship and adventure</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

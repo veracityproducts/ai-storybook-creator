@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reference Image Consistency Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .comparison {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .image-container {
+            flex: 1;
+            text-align: center;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+        .image-container h3 {
+            margin: 10px 0;
+            color: #333;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .reference { background: #e3f2fd; color: #1976d2; }
+        .generated { background: #f3e5f5; color: #7b1fa2; }
+        .analysis {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Reference Image Consistency Test</h1>
+        <p>Testing whether using the first generated image as a reference improves character consistency in subsequent generations.</p>
+        
+        <div class="comparison">
+            <div class="image-container">
+                <h3>Image 1: Reference (Original)</h3>
+                <div class="status reference">Used as reference for Image 2</div>
+                <img src="https://ileovklotgalfrgzwutt.supabase.co/storage/v1/object/public/storybook/stories/L_9xQxy6lf/page-00.png" alt="Sam sitting by tent - Reference Image">
+                <p><strong>Scene:</strong> Sam sits on a mat by a tent</p>
+            </div>
+            
+            <div class="image-container">
+                <h3>Image 2: Generated with Reference</h3>
+                <div class="status generated">Generated using Image 1 as reference</div>
+                <img src="https://ileovklotgalfrgzwutt.supabase.co/storage/v1/object/public/storybook/stories/L_9xQxy6lf/page-01.png" alt="Sam standing by tree - Generated with Reference">
+                <p><strong>Scene:</strong> Sam stands next to a tree with a backpack</p>
+            </div>
+        </div>
+        
+        <div class="analysis">
+            <h3>🔍 Analysis Points</h3>
+            <ul>
+                <li><strong>Facial Structure:</strong> Compare face shape, proportions, and features</li>
+                <li><strong>Character Design:</strong> Check clothing, accessories, and overall appearance</li>
+                <li><strong>Art Style:</strong> Evaluate consistency in rendering style and quality</li>
+                <li><strong>Color Palette:</strong> Look for consistent color choices and lighting</li>
+            </ul>
+            
+            <h4>Technical Details:</h4>
+            <ul>
+                <li>Model: Imagen 3.0 (imagen-3.0-generate-002)</li>
+                <li>Reference Type: STYLE_AND_SUBJECT</li>
+                <li>Aspect Ratio: 3:4 (Portrait)</li>
+                <li>Style: 3D animation with soft, vibrant palette</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
