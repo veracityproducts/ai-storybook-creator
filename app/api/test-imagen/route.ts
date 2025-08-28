@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json().catch(() => ({}))
     const prompt = body.prompt || "A simple red apple on a white background"
-    
+
     const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY
     if (!apiKey) throw new Error("Missing GOOGLE_GENERATIVE_AI_API_KEY env var")
 
@@ -15,7 +15,7 @@ export async function POST(req: Request) {
 
     const { base64, mimeType } = await generateImagenImage(prompt, {
       apiKey,
-      model: "imagen-4.0-generate-001",
+      model: process.env.IMAGE_MODEL_HELPER || "imagen-4.0-fast-generate-001",
       aspectRatio: "1:1",
       personGeneration: "allow_adult",
     })

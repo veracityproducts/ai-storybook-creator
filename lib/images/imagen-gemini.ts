@@ -18,10 +18,10 @@ export type ImagenConfig = {
 export async function generateImagenImage(
   prompt: string,
   cfg: ImagenConfig
-): Promise<{ base64: string; mimeType: string }> {
+): Promise<{ base64: string; mimeType: string; variants?: Array<{ base64: string; mimeType: string }> }> {
   const {
     apiKey,
-    model = "imagen-3.0-generate-002",
+    model = process.env.IMAGE_MODEL_DEFAULT || "imagen-4.0-fast-generate-001",
     numberOfImages = 1,
     aspectRatio = "3:4",
     personGeneration = "allow_adult",
@@ -58,20 +58,26 @@ export async function generateImagenImage(
     config,
   })
 
-  console.log("Imagen response:", JSON.stringify(response, null, 2))
+  console.log("Imagen response count:", response.generatedImages?.length || 0)
+  console.log("Imagen response sample mime:", response.generatedImages?.[0]?.image?.mimeType)
+  // console.log("Imagen response:", JSON.stringify(response, null, 2))
 
   if (!response.generatedImages || response.generatedImages.length === 0) {
     throw new Error("No images generated")
   }
 
-  const generatedImage = response.generatedImages[0]
-  if (!generatedImage.image?.imageBytes) {
+  const first = response.generatedImages[0]
+  if (!first.image?.imageBytes) {
     throw new Error("No image data in generated image")
   }
 
   return {
-    base64: generatedImage.image.imageBytes,
-    mimeType: generatedImage.image.mimeType || "image/png",
+    base64: first.image.imageBytes,
+    mimeType: first.image.mimeType || "image/png",
+    variants: response.generatedImages.map(img => ({
+      base64: img.image?.imageBytes || first.image.imageBytes,
+      mimeType: img.image?.mimeType || first.image.mimeType || "image/png",
+    }))
   }
 }
 

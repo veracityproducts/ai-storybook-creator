@@ -56,3 +56,8 @@ export function buildImagePath(storyId: string, pageIndex: number, ext: string =
   return `stories/${storyId}/page-${idx}.${ext}`
 }
 
+export function buildVariantImagePath(storyId: string, pageIndex: number, variantIndex: number, ext: string = "jpg") {
+  const idx = String(pageIndex).padStart(2, "0")
+  return `stories/${storyId}/page-${idx}-v${variantIndex}.${ext}`
+}
+

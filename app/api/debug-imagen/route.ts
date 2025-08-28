@@ -13,7 +13,7 @@ export async function POST(req: Request) {
       "Digital cut-paper",
       "Pastel palette",
       "Soft daylight",
-      "Clear silhouettes", 
+      "Clear silhouettes",
       "Striped shirt",
       "Small backpack",
       "Standing by tree",
@@ -22,23 +22,23 @@ export async function POST(req: Request) {
       "Sam smiling in a striped shirt with a small backpack",
       "Digital cut-paper; pastel palette; flat textures",
     ]
-    
+
     const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY
     if (!apiKey) throw new Error("Missing GOOGLE_GENERATIVE_AI_API_KEY env var")
 
     const results = []
-    
+
     for (const prompt of prompts) {
       console.log(`Testing prompt: "${prompt}"`)
-      
+
       try {
         const { base64, mimeType } = await generateImagenImage(prompt, {
           apiKey,
-          model: "imagen-3.0-generate-002",
+          model: process.env.IMAGE_MODEL_HELPER || "imagen-4.0-fast-generate-001",
           aspectRatio: "1:1",
           personGeneration: "allow_adult",
         })
-        
+
         results.push({
           prompt,
           success: true,
@@ -46,7 +46,7 @@ export async function POST(req: Request) {
           mimeType,
         })
         console.log(`✅ SUCCESS: "${prompt}"`)
-        
+
       } catch (err: any) {
         results.push({
           prompt,
@@ -55,7 +55,7 @@ export async function POST(req: Request) {
         })
         console.log(`❌ FAILED: "${prompt}" - ${err.message}`)
       }
-      
+
       // Small delay to avoid rate limiting
       await new Promise(resolve => setTimeout(resolve, 1000))
     }
@@ -69,7 +69,7 @@ export async function POST(req: Request) {
         failed: results.filter(r => !r.success).length,
       }
     })
-    
+
   } catch (err: any) {
     console.error("/api/debug-imagen error", err)
     return NextResponse.json({ ok: false, error: err?.message || String(err) }, { status: 500 })

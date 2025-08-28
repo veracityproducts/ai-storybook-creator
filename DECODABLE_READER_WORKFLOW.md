@@ -337,6 +337,49 @@ Bright vibrant 3D animation with smooth textures, warm daylight lighting, clean 
 }
 ```
 
+**Proposed additional parameters (draft — not yet implemented):**
+- negativePrompt: A string to exclude common failure modes
+  - Example: "no extra limbs, no text overlays, no brand logos, no weapons, no frightening faces, no deformed anatomy, avoid harsh shadows"
+- sampleCount: 1–4 variants per page (default 1). Recommend 2 to balance cost/quality
+- enhancePrompt: false (recommended) to prevent LLM rewrites that might alter Character DNA
+- addWatermark: true (required in production). For local R&D only: false enables seed determinism
+- seed (DEV ONLY): integer for deterministic runs while addWatermark=false
+
+Draft API request body additions to POST /api/compile-book:
+```json
+{
+  "title": "Big Pig",
+  "theme": "A big pig sits and digs",
+  "patternId": "cvc-short-i",
+  "maxPages": 3,
+  "negativePrompt": "no extra limbs, no text overlays, no brand logos, no weapons, no frightening faces, no deformed anatomy, avoid harsh shadows",
+  "sampleCount": 2,
+  "enhancePrompt": false,
+  "addWatermark": true
+}
+```
+
+Draft handler wiring (pseudo-code only; not applied):
+```ts
+// inside image generation loop
+const imageOptions = {
+  apiKey,
+  model: "imagen-4.0-fast-generate-001",
+  aspectRatio: "3:4",
+  personGeneration: "allow_adult",
+  negativePrompt: body.negativePrompt,
+  sampleCount: Math.min(Math.max(body.sampleCount ?? 1, 1), 4),
+  enhancePrompt: body.enhancePrompt ?? false,
+  addWatermark: process.env.NODE_ENV === 'production' ? true : (body.addWatermark ?? true),
+  // DEV ONLY
+  seed: (process.env.NODE_ENV !== 'production' && body.addWatermark === false) ? body.seed : undefined,
+}
+
+const { base64, mimeType, variants } = await generateImagenImage(finalPrompt, imageOptions)
+// If sampleCount > 1, select best variant by heuristic (face/wardrobe/style checks)
+```
+
+
 **Imagen Response:** Base64 encoded image data
 **Upload to Supabase:** `stories/[storyId]/page-00.png`
 **Public URL:** `https://ileovklotgalfrgzwutt.supabase.co/storage/v1/object/public/storybook/stories/[storyId]/page-00.png`
@@ -460,6 +503,9 @@ User Request → Phonics Config → Style Bible → Story Generation → Validat
 - **Image Generation Failure:** Placeholder images with error logging
 - **API Timeout:** Graceful degradation with partial results
 
+
+Note: The Character DNA registry is defined in lib/phonics-patterns.ts (entries: Sam_v1, Emma_v1, Mom_v1, Dad_v1, Pig_v1). The composeDNA(dna) helper builds a single, stable descriptor block used in prompts. Default characterMappings map common tokens (e.g., "man", "Sam", "I", "he", "woman", "Emma", "she", "Mom", "Dad", "pig") to these composed DNA profiles. Verbatim reuse rule: inject the DNA text exactly as-is in every page prompt; only the scene/action changes per page.
+
 ### Caching Strategy
 - **Style Bibles:** Cached per title/theme combination
 - **System Tokens:** Loaded once at startup
@@ -493,6 +539,39 @@ User Request → Phonics Config → Style Bible → Story Generation → Validat
 - **Animal Characters:** Avoid human children for content policy
 - **Family Dynamics:** Include parent/family character options
 
+
+### 4. Character DNA (Versioned Descriptors)
+- Define each recurring character with a stable, versioned descriptor (e.g., Sam_v1) structured across five layers:
+  1) Identity foundation (name/role/species)
+  2) Physical signature (facial structure and features, body proportions, distinctive markings)
+  3) Style identity (clothing, accessories, color scheme)
+  4) Behavioral markers (common expressions, poses, personality)
+  5) Context envelope (lighting preferences, rendering style)
+- Prompts must reuse the exact Character DNA text verbatim; only the scene/action changes.
+
+### 5. Style Lock Prompt Pattern (Imagen 4)
+- Opening anchor: front‑load core style tokens (e.g., “Bright vibrant 3D animation…”)
+- Identity block: include full Character DNA immediately after the anchor
+- Scene/action: concise page‑specific action and context
+- Mid‑prompt reinforcement: one short clause to restate style (“maintain the same Pixar‑like 3D style, smooth textures, warm daylight”)
+- System tokens + closing emphasis: composition/safety tokens and a short quality closer
+
+### 6. Negative prompts (Imagen 4)
+- Add a negative prompt line to reduce failure modes:
+  - “no extra limbs, no text overlays, no brand logos, no weapons, no frightening faces, no deformed anatomy, avoid harsh shadows”
+- Keep LLM prompt rewriting disabled (enhancePrompt off) to avoid altering Character DNA.
+
+### 7. Development determinism (seeds) — optional
+- For local R&D only: use a fixed seed with watermark disabled to evaluate DNA baselines.
+- Production: do not rely on seeds (watermark must be enabled); expect some variability.
+
+### 8. Multi‑variant selection (sampleCount)
+- Optionally request 2–4 variants per page and select the best match.
+- Heuristics (human or automated):
+  - Face/feature fidelity to Character DNA
+  - Wardrobe/accessory match
+  - Style/lighting match to tokens
+- Keep sampleCount small (2 is a good default) to control cost.
 ---
 
 ## Quality Assurance Checklist
@@ -500,6 +579,26 @@ User Request → Phonics Config → Style Bible → Story Generation → Validat
 ### Story Quality
 - [ ] All words in approved lexicon
 - [ ] Sentence count within limits
+
+---
+
+## Character DNA Quick Reference
+
+| DNA ID | Character | Species | Key Features | Clothing | Personality |
+|--------|-----------|---------|--------------|----------|-------------|
+| Sam_v1 | Sam | Red Fox | Red-orange fur, white chest/belly, bushy tail with white tip, triangular ears with black tips | Blue baseball cap, green t-shirt with paw print, brown hiking boots | Cheerful, curious, kind, open posture |
+| Emma_v1 | Emma | Gray Rabbit | Soft gray fur, round friendly face, bright sparkling eyes, small triangular ears | Yellow sundress with flower patterns, pink sandals | Warm, friendly, gentle, calm demeanor |
+| Mom_v1 | Mom | Adult Fox | Reddish-brown fur, soft facial features, kind eyes | Blue blouse, khaki pants | Gentle, supportive, relaxed |
+| Dad_v1 | Dad | Adult Wolf | Dark gray fur, strong build, friendly demeanor | Green polo shirt, brown pants | Calm, confident, supportive |
+| Pig_v1 | Big Pig | Farm Animal | Soft pink skin, round body, curly tail, button nose, bright friendly eyes | Clean simple shapes | Happy, gentle, approachable |
+
+**Mapping Examples:**
+- "I", "man", "Sam", "he" → Sam_v1
+- "she", "woman", "Emma" → Emma_v1
+- "pig" → Pig_v1
+- "Mom" → Mom_v1, "Dad" → Dad_v1
+
+**Usage Rule:** DNA descriptors are injected verbatim into every page prompt. Only scene/action context changes between pages.
 - [ ] Punctuation compliance
 - [ ] Age-appropriate content
 - [ ] Coherent narrative flow
@@ -542,6 +641,48 @@ User Request → Phonics Config → Style Bible → Story Generation → Validat
 ### Performance Optimization
 
 1. **Parallel Processing:** Generate images concurrently where possible
+
+---
+
+## Appendix: Character DNA Quick Reference
+
+Short, human-readable summaries for team onboarding. Always reuse DNA verbatim in prompts; only change the scene/action.
+
+- Sam_v1 (Red Fox)
+  - Identity: Friendly cartoon red fox for children's books
+  - Physical: Red‑orange fur; white chest/belly; bushy tail (white tip); oval face; large triangular ears (black tips); almond brown eyes; small black nose
+  - Style Identity: Bright blue baseball cap; green t‑shirt (small white paw print); sturdy brown hiking boots
+  - Behavioral: Cheerful, curious; kind demeanor; open posture
+  - Context: 3D Pixar‑like cartoon; smooth textures; warm daylight lighting
+
+- Emma_v1 (Gray Rabbit)
+  - Identity: Cheerful cartoon rabbit for children's books
+  - Physical: Soft gray fur; round friendly face; bright sparkling eyes; small triangular ears
+  - Style Identity: Yellow sundress with flower patterns; pink sandals
+  - Behavioral: Warm friendly smile; gentle, calm
+  - Context: 3D Pixar‑like cartoon; smooth textures; warm daylight lighting
+
+- Mom_v1 (Adult Fox)
+  - Identity: Caring adult fox
+  - Physical: Reddish‑brown fur; soft facial features; kind eyes
+  - Style Identity: Blue blouse; khaki pants
+  - Behavioral: Gentle, supportive; relaxed posture
+  - Context: 3D Pixar‑like cartoon; smooth textures; warm daylight lighting
+
+- Dad_v1 (Adult Wolf)
+  - Identity: Gentle adult wolf
+  - Physical: Dark gray fur; strong build; friendly demeanor
+  - Style Identity: Green polo shirt; brown pants
+  - Behavioral: Calm, confident; supportive stance
+  - Context: 3D Pixar‑like cartoon; smooth textures; warm daylight lighting
+
+- Pig_v1 (Big Pink Pig)
+  - Identity: Child‑friendly cartoon farm animal
+  - Physical: Soft pink skin; round body; curly tail; small triangular ears; button nose; bright friendly eyes
+  - Style Identity: Clean simple shapes; soft highlights
+  - Behavioral: Happy expression; gentle, approachable
+  - Context: 3D Pixar‑like cartoon; smooth textures; warm daylight lighting
+
 2. **Prompt Caching:** Cache style bibles and system tokens
 3. **Model Selection:** Use Imagen 4 Fast for cost/speed balance
 4. **Batch Operations:** Group similar operations together

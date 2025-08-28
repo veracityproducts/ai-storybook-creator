@@ -39,7 +39,7 @@ export const PHONICS_PATTERNS: PhonicsPattern[] = [
     },
     examples: ["The cat sat on the mat.", "I am sad.", "Dad had a hat."]
   },
-  
+
   {
     id: "cvc-short-i",
     name: "CVC Short I",
@@ -135,7 +135,7 @@ export const PHONICS_PATTERNS: PhonicsPattern[] = [
       approvedWords: [
         // bl- blends
         "black", "blade", "blame", "blank", "blast", "blaze", "bleak", "blend", "bless", "blind", "blink", "block", "blood", "bloom", "blown", "blue",
-        // cl- blends  
+        // cl- blends
         "clad", "clam", "clap", "class", "claw", "clay", "clean", "clear", "click", "cliff", "climb", "clip", "clock", "close", "cloth", "cloud", "clown",
         // fl- blends
         "flag", "flake", "flame", "flap", "flash", "flat", "flaw", "flax", "fled", "flee", "flesh", "flew", "flex", "flick", "flip", "flock", "flood", "floor", "flow", "flown",
@@ -228,15 +228,91 @@ export function createPhonicsConfig(patternId: string, characterMappings?: Recor
   }
 }
 
+
+// Character DNA registry (versioned, layered descriptors)
+interface CharacterDNA {
+  id: string
+  name: string
+  identity: string
+  physical: string
+  styleIdentity: string
+  behavioral: string
+  context: string
+}
+
+function composeDNA(dna: CharacterDNA): string {
+  // Compose a single, stable descriptor block for prompts (verbatim reuse)
+  return `${dna.name}, ${dna.identity}, ${dna.physical}, ${dna.styleIdentity}, ${dna.behavioral}, ${dna.context}`
+}
+
+const Sam_v1: CharacterDNA = {
+  id: "Sam_v1",
+  name: "Sam",
+  identity: "a friendly cartoon red fox character for children's books",
+  physical: "red-orange fur, white chest and belly, bushy tail with white tip, oval face with pronounced cheekbones, large triangular ears with black tips, small black nose, large almond-shaped brown eyes",
+  styleIdentity: "wearing a bright blue baseball cap, green t-shirt with a small white paw print, khaki shorts, and sturdy brown hiking boots; no backpack",
+  behavioral: "cheerful and curious expression, kind demeanor, open posture",
+  context: "3D Pixar-like cartoon style with smooth textures and warm daylight lighting"
+}
+
+const Emma_v1: CharacterDNA = {
+  id: "Emma_v1",
+  name: "Emma",
+  identity: "a cheerful cartoon rabbit character for children's books",
+  physical: "soft gray fur, round friendly face, bright sparkling eyes, small triangular ears",
+  styleIdentity: "wearing a yellow sundress with flower patterns and pink sandals",
+  behavioral: "warm friendly smile, gentle posture, calm demeanor",
+  context: "3D Pixar-like cartoon style with smooth textures and warm daylight lighting"
+}
+
+const Mom_v1: CharacterDNA = {
+  id: "Mom_v1",
+  name: "Mom",
+  identity: "a caring adult fox character",
+  physical: "reddish-brown fur, soft facial features, kind eyes",
+  styleIdentity: "wearing a blue blouse and khaki pants",
+  behavioral: "gentle supportive expression, relaxed posture",
+  context: "3D Pixar-like cartoon style with smooth textures and warm daylight lighting"
+}
+
+const Dad_v1: CharacterDNA = {
+  id: "Dad_v1",
+  name: "Dad",
+  identity: "a gentle adult wolf character",
+  physical: "dark gray fur, strong build, friendly demeanor",
+  styleIdentity: "wearing a green polo shirt and brown pants",
+  behavioral: "calm confident expression, supportive stance",
+  context: "3D Pixar-like cartoon style with smooth textures and warm daylight lighting"
+}
+
+const Pig_v1: CharacterDNA = {
+  id: "Pig_v1",
+  name: "a cheerful big pink pig",
+  identity: "a child-friendly cartoon farm animal",
+  physical: "soft pink skin, round body, curly tail, small triangular ears, button nose, bright friendly eyes",
+  styleIdentity: "clean simple shapes with soft highlights",
+  behavioral: "happy expression, gentle and approachable",
+  context: "3D Pixar-like cartoon style with smooth textures and warm daylight lighting"
+}
+
 export function getDefaultCharacterMappings(): Record<string, string> {
   return {
-    "man": "Sam, a friendly cartoon red fox character with red-orange fur, white chest and belly, bushy tail with white tip, oval face with pronounced cheekbones, large triangular ears with black tips, small black nose, large almond-shaped brown eyes with cheerful expression, wearing a bright blue baseball cap, green t-shirt with small white paw print, and sturdy brown hiking boots",
-    "Sam": "Sam, a friendly cartoon red fox character with red-orange fur, white chest and belly, bushy tail with white tip, oval face with pronounced cheekbones, large triangular ears with black tips, small black nose, large almond-shaped brown eyes with cheerful expression, wearing a bright blue baseball cap, green t-shirt with small white paw print, and sturdy brown hiking boots",
-    "I": "Sam, a friendly cartoon red fox character with red-orange fur, white chest and belly, bushy tail with white tip, oval face with pronounced cheekbones, large triangular ears with black tips, small black nose, large almond-shaped brown eyes with cheerful expression, wearing a bright blue baseball cap, green t-shirt with small white paw print, and sturdy brown hiking boots",
-    "woman": "Emma, a cheerful cartoon rabbit character with soft gray fur, wearing a yellow sundress with flower patterns, pink sandals, and bright sparkling eyes",
-    "Emma": "Emma, a cheerful cartoon rabbit character with soft gray fur, wearing a yellow sundress with flower patterns, pink sandals, and bright sparkling eyes",
-    "she": "Emma, a cheerful cartoon rabbit character with soft gray fur, wearing a yellow sundress with flower patterns, pink sandals, and bright sparkling eyes",
-    "Mom": "Mom, a caring adult fox character with reddish-brown fur, wearing a blue blouse and khaki pants, with a gentle expression and kind eyes",
-    "Dad": "Dad, a gentle adult wolf character with dark gray fur, wearing a green polo shirt and brown pants, with a strong build and friendly demeanor"
+    // Sam mappings
+    "man": composeDNA(Sam_v1),
+    "Sam": composeDNA(Sam_v1),
+    "I": composeDNA(Sam_v1),
+    "he": composeDNA(Sam_v1),
+
+    // Emma mappings
+    "woman": composeDNA(Emma_v1),
+    "Emma": composeDNA(Emma_v1),
+    "she": composeDNA(Emma_v1),
+
+    // Parents
+    "Mom": composeDNA(Mom_v1),
+    "Dad": composeDNA(Dad_v1),
+
+    // Common subject used in beginner patterns
+    "pig": composeDNA(Pig_v1),
   }
 }
