@@ -1,13 +1,26 @@
 # Decodable Reader Generator — LangGraph/Pydantic AI Implementation
 
-A Python service that generates 20 research-based decodable readers with consistent, high-quality images using Gemini 2.5 Flash Image.
+**Status:** ✅ Production-ready | **Model:** Gemini 2.5 Flash Image (stable GA)
+
+A **completely self-contained, portable Python pipeline** that generates 20 research-based decodable readers with consistent, high-quality images.
+
+## 🎯 Self-Contained & Portable
+
+**Everything needed is in this directory:**
+- ✅ All Python code (agents, tools, workflows)
+- ✅ All reference images (`reference_images/animals/` + `reference_images/humans/`)
+- ✅ All reader definitions (`data/readers.json` - 20 readers across 4 sets)
+- ✅ All documentation and examples
+
+**No dependencies on parent Next.js app or legacy code.** You can copy this entire directory to a new project and it will work.
 
 ## Features
 
 - **20 Pre-Built Readers** across 4 sets (CVC → Digraphs → Initial Blends → Final Blends)
-- **Artistic Style Continuity** — Ben/Kim reference images anchor style even for non-human-character stories
+- **Ben/Kim Approach** — Specific scene variations per page with consistent character refs (no rolling conditioning)
+- **Natural Story Flow** — Each page gets different specific location within same environment
 - **Decodability Validation** — Enforces phonics scope/sequence and heart word constraints
-- **Character Consistency** — Rolling conditioning maintains identity across pages
+- **Character Consistency** — Reference image conditioning maintains identity across pages
 - **QA Scoring** — Automated quality assessment for generated images
 
 ## Quick Start
@@ -21,11 +34,13 @@ pip install -r requirements.txt
 
 ### 2. Set Environment Variables
 
-Create `.env` in `python_backend/`:
+Create `.env.local` in the **project root** (or set environment variable):
 
 ```bash
 GOOGLE_GENERATIVE_AI_API_KEY=your_key_here
 ```
+
+The code will automatically load from `.env.local` in the project root.
 
 ### 3. Generate a Single Reader
 
@@ -85,6 +100,35 @@ python scripts/generate_all_readers.py --start reader-05 --end reader-10
 19. **Band Land** — Final blends (nd, nt, st, mp, ft)
 20. **West Wind Quest** — Comprehensive review
 
+## Directory Structure
+
+```
+langgraph_implementation/
+├── reference_images/           # All reference images (self-contained)
+│   ├── animals/               # Animal character references
+│   │   ├── animal-group.jpg   # Style reference for all animals
+│   │   ├── pat-the-fat-cat-reference.jpg
+│   │   ├── sid-the-pig-reference.jpg
+│   │   ├── gus-the-pup-reference.jpg
+│   │   ├── meg-the-hen-reference.jpg
+│   │   └── dot-the-fox-reference.jpg
+│   └── humans/                # Human character references
+│       ├── ben-ref-1.png
+│       ├── ben-ref-2.png
+│       └── kim-ref.png
+├── data/
+│   └── readers.json           # All 20 reader definitions
+├── python_backend/
+│   ├── agents/                # Orchestrator + Guardrail agents
+│   ├── tools/                 # Prompts, image gen, QA, text analysis
+│   ├── graph/                 # LangGraph workflow
+│   └── requirements.txt
+├── scripts/
+│   ├── generate_reader.py     # Single reader generation
+│   └── generate_all_readers.py # Batch generation
+└── *.md                       # Documentation
+```
+
 ## Architecture
 
 ### Agents
@@ -93,20 +137,29 @@ python scripts/generate_all_readers.py --start reader-05 --end reader-10
 
 ### Tools
 - **Text+Phonics** — `config_phonics`, `story_generate`, `story_validate`, `story_repair`
-- **Prompting** — `page_prompt` (with human-character detection)
+- **Prompting** — `page_prompt` with Ben/Kim approach (specific scene variations per page)
 - **Identity/Continuity** — `summarize_appearance`, `rolling_conditioning`, `compare_identity`
 - **Images** — `image_generate` (Gemini 2.5 Flash Image), `qa_score_and_pick`
 - **Utilities** — `detect_human_characters`, `reader_loader`
 
-### Key Innovation: Artistic Style Continuity
+### Key Innovation: Ben/Kim Approach
 
-When human characters (Ben, Kim, etc.) are **not** mentioned in the decodable text, the system still includes Ben/Kim reference images in the conditioning stack to preserve artistic style (color palette, line work, rendering technique).
+**For Animal Stories:**
+- Each page gets a **different specific scene** within the same environment
+- Same character refs passed to **every page** (no rolling conditioning with previous images)
+- Creates natural story flow with variety while maintaining character consistency
 
-**Example:**
-- **Reader 1: "Pat the Cat"** — No human characters, but images maintain the same illustrative style as Ben/Kim
-- **Reader 15: "Trent and Brent"** — Human characters present, so identity + wardrobe are locked
+**Example: "Pat the Cat"**
+- Page 1: "living room corner near window"
+- Page 2: "near low bookshelf"
+- Page 3: "living room center with rug"
+- Page 4: "by the couch"
 
-This ensures visual consistency across all 20 readers.
+Same cat, same living room, but different specific locations and poses.
+
+**For Human Stories:**
+- Ben/Kim reference images lock identity and wardrobe
+- Rolling conditioning maintains consistency across pages
 
 ## API Endpoint
 

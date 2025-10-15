@@ -33,8 +33,8 @@ class OrchestratorAgent:
             return self._seed_refs_cache
 
         refs = []
-        # Path relative to project root
-        base_path = os.path.join(os.path.dirname(__file__), "../../../ai_docs/images-2.5-flash-test")
+        # Path now inside langgraph_implementation/reference_images/
+        base_path = os.path.join(os.path.dirname(__file__), "../../reference_images/humans")
 
         for img_name in ["ben-ref-1.png", "kim-ref.png"]:
             img_path = os.path.join(base_path, img_name)
@@ -51,7 +51,7 @@ class OrchestratorAgent:
         if self._animal_group_ref is not None:
             return self._animal_group_ref
 
-        base_path = os.path.join(os.path.dirname(__file__), "../../../ai_docs/animal-references")
+        base_path = os.path.join(os.path.dirname(__file__), "../../reference_images/animals")
         img_path = os.path.join(base_path, "animal-group.jpg")
 
         if os.path.exists(img_path):
@@ -80,7 +80,7 @@ class OrchestratorAgent:
         if animal_name not in animal_files:
             return None
 
-        base_path = os.path.join(os.path.dirname(__file__), "../../../ai_docs/animal-references")
+        base_path = os.path.join(os.path.dirname(__file__), "../../reference_images/animals")
         img_path = os.path.join(base_path, animal_files[animal_name])
 
         if os.path.exists(img_path):
