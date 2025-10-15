@@ -1,8 +1,10 @@
-# Decodable Reader Generator — LangGraph/Pydantic AI Implementation
+# Decodable Reader Generator — Sequential Python Pipeline
 
 **Status:** ✅ Production-ready | **Model:** Gemini 2.5 Flash Image (stable GA)
 
 A **completely self-contained, portable Python pipeline** that generates 20 research-based decodable readers with consistent, high-quality images.
+
+**Architecture:** Sequential async Python workflow (not graph-based) using OrchestratorAgent, Pydantic validation, and Gemini 2.5 Flash Image.
 
 ## 🎯 Self-Contained & Portable
 
@@ -13,6 +15,15 @@ A **completely self-contained, portable Python pipeline** that generates 20 rese
 - ✅ All documentation and examples
 
 **No dependencies on parent Next.js app or legacy code.** You can copy this entire directory to a new project and it will work.
+
+## Technology Stack
+
+- **Sequential async Python** - OrchestratorAgent with linear workflow (not graph-based)
+- **Gemini 2.5 Flash Image** - Image generation with reference conditioning
+- **Pydantic** - Data validation and type safety
+- **Python 3.13+**
+
+**Note:** Despite `langgraph` being in requirements.txt, this pipeline does **not** use LangGraph's graph structure (StateGraph, nodes, edges). It's a straightforward sequential async workflow.
 
 ## Features
 
