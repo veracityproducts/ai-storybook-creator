@@ -1,0 +1,340 @@
+{
+  "readers": [
+    {
+      "id": "reader-01",
+      "title": "Pat the Cat",
+      "set": 1,
+      "setName": "CVC Readers (Short Vowels Only)",
+      "phonicsFocus": "Short a with simple consonants (c, m, p, t, s, n)",
+      "patternId": "cvc-short-a",
+      "decodability": 90,
+      "heartWords": ["the", "a", "I"],
+      "pages": [
+        {"index": 0, "text": "Pat sat."},
+        {"index": 1, "text": "The cat sat."},
+        {"index": 2, "text": "Pat pat the cat."},
+        {"index": 3, "text": "The cat naps."}
+      ]
+    },
+    {
+      "id": "reader-02",
+      "title": "Big Pig",
+      "set": 1,
+      "setName": "CVC Readers (Short Vowels Only)",
+      "phonicsFocus": "Short i with consonants (b, d, g, h, p, w)",
+      "patternId": "cvc-short-i",
+      "decodability": 88,
+      "heartWords": ["the", "a", "I"],
+      "pages": [
+        {"index": 0, "text": "The pig is big."},
+        {"index": 1, "text": "The pig digs."},
+        {"index": 2, "text": "The pig is in a pit."},
+        {"index": 3, "text": "Dig, dig, dig!"}
+      ]
+    },
+    {
+      "id": "reader-03",
+      "title": "Hot Dog",
+      "set": 1,
+      "setName": "CVC Readers (Short Vowels Only)",
+      "phonicsFocus": "Short o with consonants (d, g, h, j, l, p, t)",
+      "patternId": "cvc-short-o",
+      "decodability": 92,
+      "heartWords": ["the", "a", "I"],
+      "pages": [
+        {"index": 0, "text": "The dog is hot."},
+        {"index": 1, "text": "The dog jogs."},
+        {"index": 2, "text": "A pot is hot."},
+        {"index": 3, "text": "Hop in, dog!"}
+      ]
+    },
+    {
+      "id": "reader-04",
+      "title": "Bud the Pup",
+      "set": 1,
+      "setName": "CVC Readers (Short Vowels Only)",
+      "phonicsFocus": "Short u with consonants (b, d, g, j, m, p, r, s)",
+      "patternId": "cvc-short-u",
+      "decodability": 90,
+      "heartWords": ["the", "a", "I"],
+      "pages": [
+        {"index": 0, "text": "Bud is a pup."},
+        {"index": 1, "text": "The pup dug."},
+        {"index": 2, "text": "Bud jumps up."},
+        {"index": 3, "text": "Run, run, Bud!"}
+      ]
+    },
+    {
+      "id": "reader-05",
+      "title": "Red Hen",
+      "set": 1,
+      "setName": "CVC Readers (Short Vowels Only)",
+      "phonicsFocus": "Short e with consonants (b, h, n, p, r, t)",
+      "patternId": "cvc-short-e",
+      "decodability": 87,
+      "heartWords": ["the", "a", "I"],
+      "pages": [
+        {"index": 0, "text": "The hen is red."},
+        {"index": 1, "text": "The red hen pets a pet."},
+        {"index": 2, "text": "Ten hens in a pen."},
+        {"index": 3, "text": "The red hen gets the net."}
+      ]
+    },
+    {
+      "id": "reader-06",
+      "title": "Chip and Chop",
+      "set": 2,
+      "setName": "Digraph Readers (CVC + Digraphs)",
+      "phonicsFocus": "ch digraph with CVC review",
+      "patternId": "digraph-ch",
+      "decodability": 89,
+      "heartWords": ["the", "a", "I", "to", "and"],
+      "pages": [
+        {"index": 0, "text": "Chip is a chipmunk."},
+        {"index": 1, "text": "Chop is a chipmunk."},
+        {"index": 2, "text": "Chip and Chop chat."},
+        {"index": 3, "text": "The chipmunks munch chips."},
+        {"index": 4, "text": "Chip and Chop run to the den."}
+      ]
+    },
+    {
+      "id": "reader-07",
+      "title": "Fish Wish",
+      "set": 2,
+      "setName": "Digraph Readers (CVC + Digraphs)",
+      "phonicsFocus": "sh digraph with CVC review",
+      "patternId": "digraph-sh",
+      "decodability": 87,
+      "heartWords": ["the", "a", "I", "to", "and"],
+      "pages": [
+        {"index": 0, "text": "I wish for a fish."},
+        {"index": 1, "text": "The fish is in a dish."},
+        {"index": 2, "text": "Shh! The fish swish and dash."},
+        {"index": 3, "text": "I can wash the fish dish."},
+        {"index": 4, "text": "A fish in a shop!"}
+      ]
+    },
+    {
+      "id": "reader-08",
+      "title": "This and That",
+      "set": 2,
+      "setName": "Digraph Readers (CVC + Digraphs)",
+      "phonicsFocus": "th digraph (voiced and unvoiced) with CVC review",
+      "patternId": "digraph-th",
+      "decodability": 90,
+      "heartWords": ["the", "a", "I", "to", "and"],
+      "pages": [
+        {"index": 0, "text": "This is a path."},
+        {"index": 1, "text": "That is a bath."},
+        {"index": 2, "text": "I think this is thick."},
+        {"index": 3, "text": "That moth is thin."},
+        {"index": 4, "text": "This and that!"}
+      ]
+    },
+    {
+      "id": "reader-09",
+      "title": "Duck Luck",
+      "set": 2,
+      "setName": "Digraph Readers (CVC + Digraphs)",
+      "phonicsFocus": "ck spelling pattern with short vowels",
+      "patternId": "digraph-ck",
+      "decodability": 92,
+      "heartWords": ["the", "a", "I", "to", "and"],
+      "pages": [
+        {"index": 0, "text": "The duck had luck."},
+        {"index": 1, "text": "Rick the duck got a sock."},
+        {"index": 2, "text": "Nick the duck got a rock."},
+        {"index": 3, "text": "The ducks kick and quack."},
+        {"index": 4, "text": "Pick a duck!"}
+      ]
+    },
+    {
+      "id": "reader-10",
+      "title": "Ring a Song",
+      "set": 2,
+      "setName": "Digraph Readers (CVC + Digraphs)",
+      "phonicsFocus": "ng and nk digraphs with CVC review",
+      "patternId": "digraph-ng-nk",
+      "decodability": 85,
+      "heartWords": ["the", "a", "I", "to", "and"],
+      "pages": [
+        {"index": 0, "text": "I sing a song."},
+        {"index": 1, "text": "Ding, dong, ding!"},
+        {"index": 2, "text": "The king can sing and bang the gong."},
+        {"index": 3, "text": "I think pink is long."},
+        {"index": 4, "text": "Sing along to the song!"}
+      ]
+    },
+    {
+      "id": "reader-11",
+      "title": "Frog on a Log",
+      "set": 3,
+      "setName": "Initial Blend Readers (CVC + Digraphs + Initial Blends)",
+      "phonicsFocus": "R-blends (fr, gr, br, cr, tr) with digraphs",
+      "patternId": "blends-initial-r",
+      "decodability": 86,
+      "heartWords": ["the", "a", "I", "to", "and", "is", "he", "she"],
+      "pages": [
+        {"index": 0, "text": "A green frog sits on a log."},
+        {"index": 1, "text": "The frog hops from the log to a rock."},
+        {"index": 2, "text": "A crab grabs the frog!"},
+        {"index": 3, "text": "The brave frog croaks and trips back."},
+        {"index": 4, "text": "The frog grins on the fresh grass."}
+      ]
+    },
+    {
+      "id": "reader-12",
+      "title": "Sled Fun",
+      "set": 3,
+      "setName": "Initial Blend Readers (CVC + Digraphs + Initial Blends)",
+      "phonicsFocus": "L-blends (sl, bl, cl, fl, gl, pl) with digraphs",
+      "patternId": "blends-initial-l",
+      "decodability": 84,
+      "heartWords": ["the", "a", "I", "to", "and", "is", "he", "she"],
+      "pages": [
+        {"index": 0, "text": "The black sled slides."},
+        {"index": 1, "text": "Flip flops on the sled."},
+        {"index": 2, "text": "Bliss claps as she sleds."},
+        {"index": 3, "text": "The sled glides and slips."},
+        {"index": 4, "text": "A glad clan sleds on the flat hill!"}
+      ]
+    },
+    {
+      "id": "reader-13",
+      "title": "Snack Stop",
+      "set": 3,
+      "setName": "Initial Blend Readers (CVC + Digraphs + Initial Blends)",
+      "phonicsFocus": "S-blends (sn, sp, st, sk, sm, sw) with digraphs",
+      "patternId": "blends-initial-s",
+      "decodability": 87,
+      "heartWords": ["the", "a", "I", "to", "and", "is", "he", "she"],
+      "pages": [
+        {"index": 0, "text": "Stan stops at the snack shop."},
+        {"index": 1, "text": "He sniffs the fresh snacks."},
+        {"index": 2, "text": "Stan spots chips and a crisp snap stick."},
+        {"index": 3, "text": "The snacks smell grand!"},
+        {"index": 4, "text": "Stan skips with the bag to swim class."}
+      ]
+    },
+    {
+      "id": "reader-14",
+      "title": "Drip Drop",
+      "set": 3,
+      "setName": "Initial Blend Readers (CVC + Digraphs + Initial Blends)",
+      "phonicsFocus": "Mixed initial blends with all digraphs",
+      "patternId": "blends-initial-mixed",
+      "decodability": 85,
+      "heartWords": ["the", "a", "I", "to", "and", "is", "he", "she"],
+      "pages": [
+        {"index": 0, "text": "Drip, drop, splish, splash!"},
+        {"index": 1, "text": "The spring brings soft drops."},
+        {"index": 2, "text": "A sprout sprouts from the sand."},
+        {"index": 3, "text": "A trim track gets slick and slips."},
+        {"index": 4, "text": "The fresh grass and clams drink the drips!"}
+      ]
+    },
+    {
+      "id": "reader-15",
+      "title": "Trent and Brent",
+      "set": 3,
+      "setName": "Initial Blend Readers (CVC + Digraphs + Initial Blends)",
+      "phonicsFocus": "Comprehensive initial blends review",
+      "patternId": "blends-initial",
+      "decodability": 83,
+      "heartWords": ["the", "a", "I", "to", "and", "is", "he", "she"],
+      "pages": [
+        {"index": 0, "text": "Trent and Brent are chums."},
+        {"index": 1, "text": "The pals grab the swings and spin fast."},
+        {"index": 2, "text": "Brent trips, but he grins."},
+        {"index": 3, "text": "Trent helps Brent stand and brush off."},
+        {"index": 4, "text": "Glad pals skip from the swings to the track!"}
+      ]
+    },
+    {
+      "id": "reader-16",
+      "title": "Camp Quest",
+      "set": 4,
+      "setName": "Final Blend Readers (All Previous Patterns + Final Blends)",
+      "phonicsFocus": "Final blends (mp, st, nd, nt, nk) with all previous patterns",
+      "patternId": "blends-final",
+      "decodability": 84,
+      "heartWords": ["the", "a", "I", "to", "and", "is", "he", "she", "was", "of"],
+      "pages": [
+        {"index": 0, "text": "Grant went to camp last spring."},
+        {"index": 1, "text": "He slept in a tent and felt the crisp wind."},
+        {"index": 2, "text": "The camp had a fast hunt for frogs and fish."},
+        {"index": 3, "text": "Grant stomp, stomp, stomped on the path at dusk."},
+        {"index": 4, "text": "He thinks camp was the best and wants to go back next summer!"}
+      ]
+    },
+    {
+      "id": "reader-17",
+      "title": "The Stamp Shop",
+      "set": 4,
+      "setName": "Final Blend Readers (All Previous Patterns + Final Blends)",
+      "phonicsFocus": "Final blends (st, mp, ft, pt) with initial blends and digraphs",
+      "patternId": "blends-final",
+      "decodability": 82,
+      "heartWords": ["the", "a", "I", "to", "and", "is", "he", "she", "was", "of"],
+      "pages": [
+        {"index": 0, "text": "The stamp shop on Elm Street is grand."},
+        {"index": 1, "text": "Mrs. Frost kept old stamps from the past."},
+        {"index": 2, "text": "She swept the shop and stacked the stamps with help."},
+        {"index": 3, "text": "The stamps cost a lot, but Kent still spent his funds."},
+        {"index": 4, "text": "He left the shop with soft stamps of ducks and plants!"}
+      ]
+    },
+    {
+      "id": "reader-18",
+      "title": "Kind Skunk",
+      "set": 4,
+      "setName": "Final Blend Readers (All Previous Patterns + Final Blends)",
+      "phonicsFocus": "Final blends (nk, nd, nt, ft, lt) with all patterns",
+      "patternId": "blends-final",
+      "decodability": 83,
+      "heartWords": ["the", "a", "I", "to", "and", "is", "he", "she", "was", "of"],
+      "pages": [
+        {"index": 0, "text": "A skunk went past the pond to find a pal."},
+        {"index": 1, "text": "The skunk felt sad, but then he met a kind chipmunk."},
+        {"index": 2, "text": "The chipmunk did not mind the scent and did not shrink back."},
+        {"index": 3, "text": "The chums held hands and sang next to the sandbox."},
+        {"index": 4, "text": "The skunk grinned and felt glad at last!"}
+      ]
+    },
+    {
+      "id": "reader-19",
+      "title": "Band Land",
+      "set": 4,
+      "setName": "Final Blend Readers (All Previous Patterns + Final Blends)",
+      "phonicsFocus": "Final blends (nd, nt, st, mp, ft) with complex sentences",
+      "patternId": "blends-final",
+      "decodability": 81,
+      "heartWords": ["the", "a", "I", "to", "and", "is", "he", "she", "was", "of"],
+      "pages": [
+        {"index": 0, "text": "In Band Land, the grand band must help the king."},
+        {"index": 1, "text": "The band held trumpets, drums that went thump, and long flutes."},
+        {"index": 2, "text": "The band spent the day next to the sand drifts practicing songs."},
+        {"index": 3, "text": "The king felt glad and clapped when the band burst into the grand tent."},
+        {"index": 4, "text": "At last, the band went to the next land to present a gift of music!"}
+      ]
+    },
+    {
+      "id": "reader-20",
+      "title": "West Wind Quest",
+      "set": 4,
+      "setName": "Final Blend Readers (All Previous Patterns + Final Blends)",
+      "phonicsFocus": "Comprehensive review of all final blends, initial blends, and digraphs",
+      "patternId": "blends-final",
+      "decodability": 80,
+      "heartWords": ["the", "a", "I", "to", "and", "is", "he", "she", "was", "of"],
+      "pages": [
+        {"index": 0, "text": "The west wind swept across the vast land and bent the plants."},
+        {"index": 1, "text": "Swift, the smallest elf, felt the wind and had a bold plan to find its path."},
+        {"index": 2, "text": "Swift drank from his flask and kept his quest strong, jumping past hills and ponds."},
+        {"index": 3, "text": "At the crest of the last bluff, Swift met the west wind at the end."},
+        {"index": 4, "text": "The west wind was just a soft draft, and Swift grinned as he held the secret of the wind quest at last!"}
+      ]
+    }
+  ]
+}
+
